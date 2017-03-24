@@ -45,12 +45,12 @@ void Bot_EchoMessages() {
         bot.sendMessage(bot.message[i][4], "Welcome on the smart chat", "");
         started = true;
     }
-    else if (started) {
-        bot.sendMessage(bot.message[i][4], bot.message[i][5], "");
-    }
     else if (bot.message[i][5] == "/end") {
         bot.sendMessage(bot.message[i][4], "Goodbye", "");
         started = false;
+    }
+    else if (started) {
+        bot.sendMessage(bot.message[i][4], bot.message[i][5], "");
     }
   }
   bot.message[0][0] = "";   // All messages have been replied - reset new messages
