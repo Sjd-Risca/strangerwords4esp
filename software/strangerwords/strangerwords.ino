@@ -8,11 +8,11 @@
 #include <ESP8266TelegramBOT.h>
 
 // Replace with your network credentials
-const char* ssid = "mySSID";  //insert here the wifi ssid
-const char* password = "mypw"; //insert here the wifi password
-#define BOTtoken "000000000000:XXXXXXXXXXXXXXXX"  //token of your bot
-#define BOTname "mybot"           //set chan name here
-#define BOTusername "mybot_bot"   //and bot name here
+const char* ssid = "ESSID";  //insert here the wifi ssid
+const char* password = "scrPW"; //insert here the wifi password
+#define BOTtoken "0000:XXXXXXXXXXXXX"  //token of TestBOT
+#define BOTname "chat"
+#define BOTusername "chat_bot"
 
 ESP8266WebServer server(80);
 
@@ -43,14 +43,14 @@ void Bot_EchoMessages() {
     edit_webpage(bot.message[i][5]);
     if (bot.message[i][5] == "/start") {
         bot.sendMessage(bot.message[i][4], "Welcome on the smart chat", "");
-        started = true
+        started = true;
     }
     else if (started) {
         bot.sendMessage(bot.message[i][4], bot.message[i][5], "");
     }
     else if (bot.message[i][5] == "/end") {
         bot.sendMessage(bot.message[i][4], "Goodbye", "");
-        started = false
+        started = false;
     }
   }
   bot.message[0][0] = "";   // All messages have been replied - reset new messages
