@@ -17,6 +17,7 @@ const char* password = "mypw"; //insert here the wifi password
 ESP8266WebServer server(80);
 
 String webPage = "";
+bool started = false;
 
 void handleRoot() {
   server.send(200, "text/html", webPage);
@@ -39,8 +40,18 @@ long Bot_lasttime;   //last time messages' scan has been done
 void Bot_EchoMessages() {
 
   for (int i = 1; i < bot.message[0][0].toInt() + 1; i++)      {
-    bot.sendMessage(bot.message[i][4], bot.message[i][5], "");
     edit_webpage(bot.message[i][5]);
+    if (bot.message[i][5] == "/start") {
+        bot.sendMessage(bot.message[i][4], "Welcome on the smart chat", "");
+        started = true
+    }
+    else if (started) {
+        bot.sendMessage(bot.message[i][4], bot.message[i][5], "");
+    }
+    else if (bot.message[i][5] == "/end") {
+        bot.sendMessage(bot.message[i][4], "Goodbye", "");
+        started = false
+    }
   }
   bot.message[0][0] = "";   // All messages have been replied - reset new messages
 }
